@@ -1,24 +1,10 @@
 from django.shortcuts import render
-
-posts = [
-    {
-        'author': 'Jumaa',
-        'title': 'Blog Post 1',
-        'content': 'First post content',
-        'date_posted': '25/01/2021',
-    },
-    {
-        'author': 'Ahmed',
-        'title': 'Blog Post 2',
-        'content': 'Second post content',
-        'date_posted': '27/01/2021',
-    },
-]
+from .models import Post
 
 def index(request):
     context = {
         'title_page': 'Home',
-        'posts': posts,
+        'posts': Post.objects.all().order_by('-date_posted'),
     }
     return render(request, 'blog/index.html', context)
 
